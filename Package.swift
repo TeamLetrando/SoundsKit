@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "SoundsKit",
+    platforms: [.iOS(.v13)],
     products: [
         .library(
             name: "SoundsKit",

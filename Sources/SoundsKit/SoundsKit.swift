@@ -1,7 +1,7 @@
 import AVFoundation
 import Foundation
 
-public class SoundsKit {
+open class SoundsKit {
     
     var file: String
     var fileExtension: String
@@ -16,12 +16,12 @@ public class SoundsKit {
     }
     
     ///
-    func setKeyAudio(_ key: Bool){
+    public func setKeyAudio(_ key: Bool){
         userDefaults.set(key, forKey: "sound")
     }
 
     /// Globally check enable or disable sound.
-    func audioIsOn() -> Bool {
+    public func audioIsOn() -> Bool {
         if userDefaults.object(forKey: "sound") == nil {
             setKeyAudio(true)
         }
@@ -29,7 +29,7 @@ public class SoundsKit {
     }
     
     /// Play sound from a sound file.
-    func play(bundle: Bundle = Bundle.main) throws {
+    public func play(bundle: Bundle = Bundle.main) throws {
             /// Sound session. The default value is the shared `AVAudioSession` session with `ambient` category.
             let audioSession = AVAudioSession.sharedInstance()
             try audioSession.setCategory(.ambient)
@@ -49,14 +49,14 @@ public class SoundsKit {
     }
     
     /// Stop playing the sound.
-    func stop() {
+    public func stop() {
         setKeyAudio(false)
         audioPlayer?.stop()
     }
     
     /// Reproduce speech from a word or letter.
     @discardableResult
-    func reproduceSpeech(_ text:String, language: String = "pt-BR", delegate: AVSpeechSynthesizerDelegate? = nil) -> AVSpeechSynthesizer {
+    public func reproduceSpeech(_ text:String, language: String = "pt-BR", delegate: AVSpeechSynthesizerDelegate? = nil) -> AVSpeechSynthesizer {
         let utterance =  AVSpeechUtterance(string: text)
         let voice = AVSpeechSynthesisVoice(language: language)
         utterance.voice = voice
