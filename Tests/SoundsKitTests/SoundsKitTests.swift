@@ -11,7 +11,8 @@ final class SoundsKitTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        soundKit = SoundsKit(file: "", fileExtention: "")
+        SoundsKit.file = ""
+        SoundsKit.fileExtension = ""
     }
     
     override func tearDown() {
@@ -68,14 +69,16 @@ final class SoundsKitTests: XCTestCase {
     //MARK: Play function test
     func test_play() {
         //Given
-        soundKit = SoundsKit(file: "test", fileExtention: "wav")
+        SoundsKit.file = "test"
+        SoundsKit.fileExtension = "wav"
         //Then
         XCTAssertNoThrow(try SoundsKit.play(bundle: bundle))
     }
     
     func test_play_withError() {
         //Given
-        soundKit = SoundsKit(file: "nonexistent", fileExtention: "wav")
+        SoundsKit.file = "nonexistent"
+        SoundsKit.fileExtension = "wav"
         //When
         XCTAssertThrowsError(try SoundsKit.play(bundle: bundle)) { error in
         //Then
@@ -85,7 +88,8 @@ final class SoundsKitTests: XCTestCase {
     
     func test_play_withErrorBundle() {
         //Given
-        soundKit = SoundsKit(file: "nonexistent", fileExtention: "wav")
+        SoundsKit.file = "nonexistent"
+        SoundsKit.fileExtension = "wav"
         //When
         XCTAssertThrowsError(try SoundsKit.play()) { error in
         //Then
@@ -95,7 +99,8 @@ final class SoundsKitTests: XCTestCase {
     
     func test_play_withErrorFileExtension() {
         //Given
-        soundKit = SoundsKit(file: "corrupt", fileExtention: "pdf")
+        SoundsKit.file = "corrupt"
+        SoundsKit.fileExtension = "pdf"
         //When
         XCTAssertThrowsError(try SoundsKit.play(bundle: bundle)) { error in
             //Then
@@ -122,15 +127,16 @@ final class SoundsKitTests: XCTestCase {
     //MARK: Stop function test
     func test_stop() {
         //Given
-        soundKit = SoundsKit(file: "test", fileExtention: "wav")
+        SoundsKit.file = "test"
+        SoundsKit.fileExtension = "wav"
         //When
         try? SoundsKit.play(bundle: bundle)
         let sutOn = SoundsKit.audioIsOn()
-        XCTAssertTrue(try XCTUnwrap(sutOn))
+        XCTAssertFalse(try XCTUnwrap(sutOn))
         SoundsKit.stop()
         let sutOff = SoundsKit.audioIsOn()
         //Then
-        XCTAssertFalse(try XCTUnwrap(sutOff))
+        XCTAssertTrue(try XCTUnwrap(sutOff))
     }
 
     //MARK: Reproduce Speech function test

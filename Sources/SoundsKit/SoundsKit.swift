@@ -39,8 +39,8 @@ open class SoundsKit {
             audioPlayer = try AVAudioPlayer(contentsOf: url)
             audioPlayer?.numberOfLoops = -1
             audioPlayer?.prepareToPlay()
-            setKeyAudio(true)
             audioPlayer?.play()
+            setKeyAudio(false)
         } catch {
             throw ErrorSound.failedSetAudio
         }
@@ -48,8 +48,8 @@ open class SoundsKit {
     
     /// Stop playing the sound.
     public static func stop() {
-        setKeyAudio(false)
         audioPlayer?.stop()
+        setKeyAudio(true)
     }
 
     /// Reproduce speech from a word or letter.
