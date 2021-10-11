@@ -27,7 +27,7 @@ open class SoundsKit {
     }
     /// Play sound from a sound file.
     /// - Parameter bundle: It's for default a main bundle, but if you need to customize, it's possible with this parameter.
-    public static func play(bundle: Bundle = Bundle.main) throws {
+    public static func play(bundle: Bundle = .main) throws {
             /// Sound session. The default value is the shared `AVAudioSession` session with `ambient` category.
             let audioSession = AVAudioSession.sharedInstance()
             try audioSession.setCategory(.ambient)
