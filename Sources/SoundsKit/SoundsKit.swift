@@ -3,18 +3,13 @@ import Foundation
 
 open class SoundsKit {
     
+    ///Set sound `file` first play it
     public static var file: String?
-    public static var fileExtension: String?
+    public static var fileExtension: String = "mp3"
     
     private static var audioPlayer: AVAudioPlayer?
     
     static let userDefaults = UserDefaults.standard
-    
-    public init(file: String, fileExtention: String) {
-        SoundsKit.file = file
-        SoundsKit.fileExtension = fileExtention
-    }
-    
     
     /// Set first time of sound
     /// - Parameter key: Choose the first state of sound and add  this function into you launch funcion at AppDelegate
