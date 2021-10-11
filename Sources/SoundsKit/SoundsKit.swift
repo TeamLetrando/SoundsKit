@@ -10,7 +10,7 @@ open class SoundsKit {
     
     static let userDefaults = UserDefaults.standard
     
-    init(file: String, fileExtention: String) {
+    public init(file: String, fileExtention: String) {
         SoundsKit.file = file
         SoundsKit.fileExtension = fileExtention
     }
