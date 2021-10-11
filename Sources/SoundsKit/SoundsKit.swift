@@ -3,8 +3,8 @@ import Foundation
 
 open class SoundsKit {
     
-    static var file: String?
-    static var fileExtension: String?
+    public static var file: String?
+    public static var fileExtension: String?
     
     private static var audioPlayer: AVAudioPlayer?
     
