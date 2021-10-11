@@ -57,7 +57,7 @@ open class SoundsKit {
     ///   - text: the text if you want to speech
     ///   - language: It's for default a  `Portuguese language`, but if you need to customize, it's possible with this parameter.
     @discardableResult
-    public static func reproduceSpeech(_ text:String, language: String = "pt-BR") -> AVSpeechSynthesizer {
+    public static func reproduceSpeech(_ text: String, language: String = "pt-BR") -> AVSpeechSynthesizer {
         let utterance =  AVSpeechUtterance(string: text)
         let voice = AVSpeechSynthesisVoice(language: language)
         utterance.voice = voice
