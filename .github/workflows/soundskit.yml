@@ -19,9 +19,8 @@ jobs:
     - name: Build
       run: |
            pwd
-           xcrun simctl list
            xcodebuild clean test -workspace SoundsKit.xcworkspace -scheme SoundsKit -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
-           bash <(curl -s https://codecov.io/bash
+           bash <(curl -s https://codecov.io/bash)
       env: 
         destination: ${{ matrix.destination}}
 
