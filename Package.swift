@@ -17,7 +17,7 @@ let package = Package(
         .target(
             name: "SoundsKit",
             dependencies: [],
-            path: "Sources")),
+            path: "Sources"),
         .testTarget(
             name: "SoundsKitTests",
             dependencies: ["SoundsKit"],
