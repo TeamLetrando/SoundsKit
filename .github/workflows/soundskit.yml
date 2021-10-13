@@ -1,34 +1,33 @@
-name: Swift
+name: Build & Test
 
 on:
   pull_request:
     branches: [ main ]
 
 jobs:
-  build:
-
-    runs-on: macos-latest
+  linux:
+    name: Test on Linux
+    runs-on: ubuntu-18.04
+    container:
+      image: swift:${{ matrix.swift_version }}
     strategy:
       matrix:
-        destination: ['platform=iOS Simulator,OS=14.4,name=iPhone 12']
-    env:
-      DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode_version }}.app
-
+        swift_version: ["5.0", "5.1"]
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v1
+      - name: Show version
+        run: swift --version
+      - name: Build
+        run: swift build -v
+      - name: Run tests
+        run: swift test -v
+
+  macOS:
+    name: Test on macOS
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v1
     - name: Build
-      run: |
-          pwd
-          set -euo pipefail
-          swift package clean
-          swift build --sanitize="address"
-          bash <(curl -s https://codecov.io/bash)
-      env: 
-        destination: ${{ matrix.destination}}
-
-    - name: Run Tests
-      run: |
-          set -euo pipefail
-          xcodebuild -scheme AudioKit -enableAddressSanitizer YES test | xcpretty
-
-
+      run: swift build -v
+    - name: Run tests
+      run: swift test -v
