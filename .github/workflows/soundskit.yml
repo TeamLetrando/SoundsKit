@@ -11,6 +11,8 @@ jobs:
     strategy:
       matrix:
         destination: ['platform=iOS Simulator,OS=14.4,name=iPhone 12']
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode_version }}.app
 
     steps:
     - uses: actions/checkout@v2
@@ -24,7 +26,9 @@ jobs:
       env: 
         destination: ${{ matrix.destination}}
 
-    - name: Run tests
-      run: swift test -v
+    - name: Run Tests
+      run: |
+          set -euo pipefail
+          xcodebuild -scheme AudioKit -enableAddressSanitizer YES test | xcpretty
 
 
