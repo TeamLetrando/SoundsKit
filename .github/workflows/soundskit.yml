@@ -3,16 +3,15 @@ name: Build & Test
 on:
   pull_request:
     branches: [ main ]
-
+    
 jobs:
-  linux:
-    name: Test on Linux
-    runs-on: ubuntu-18.04
-    container:
-      image: swift:${{ matrix.swift_version }}
+  build:
+
+    runs-on: macos-latest
     strategy:
       matrix:
-        swift_version: ["5.0", "5.1"]
+        destination: ['platform=iOS Simulator,OS=14.4,name=iPhone 12']
+
     steps:
       - uses: actions/checkout@v1
       - name: Show version
@@ -21,13 +20,3 @@ jobs:
         run: swift build -v
       - name: Run tests
         run: swift test -v
-
-  macOS:
-    name: Test on macOS
-    runs-on: macOS-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: Build
-      run: swift build -v
-    - name: Run tests
-      run: swift test -v
