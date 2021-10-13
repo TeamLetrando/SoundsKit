@@ -5,24 +5,12 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-
+  test:
     runs-on: macos-latest
-    strategy:
-      matrix:
-        destination: ['platform=iOS Simulator,OS=14.4,name=iPhone 12']
 
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: |
-           pwd
-           swift package init --type library
-           xcrun simctl list
-           xcodebuild clean test -workspace SoundsKit.xcworkspace -scheme SoundsKit -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
-           bash <(curl -s https://codecov.io/bash
-      env: 
-        destination: ${{ matrix.destination}}
-
+      run: swift build -v
     - name: Run tests
       run: swift test -v
