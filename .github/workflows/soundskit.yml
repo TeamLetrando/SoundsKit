@@ -6,7 +6,7 @@ on:
     
 jobs:
   unit_tests:
-    runs-on: macos-latest
+    runs-on: macos-10.14
     steps:
     - name: Repository checkout
       uses: actions/checkout@v2
