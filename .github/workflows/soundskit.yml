@@ -10,7 +10,11 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        destination: ['platform=iOS Simulator,OS=14.4,name=iPhone 12']
+        xcode: [12.4]
+        platform: ["ios"]
+      fail-fast: false
+    env:
+      DEVELOPER_DIR: "/Applications/Xcode_${{ matrix.xcode }}.app"
     steps:
     - uses: actions/checkout@v2
     - name: Build
