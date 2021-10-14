@@ -9,18 +9,14 @@ jobs:
 
     runs-on: macos-latest
     strategy:
-      matrix:
-        xcode: [12.4]
-        platform: ["ios"]
-      fail-fast: false
-    env:
-      DEVELOPER_DIR: "/Applications/Xcode_${{ matrix.xcode }}.app"
+        matrix:
+          destination: ['platform=iOS Simulator,OS=14.4,name=iPhone 12']
+
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@main
     - name: Build
       run: |
            pwd
-           Run ls -n /Applications/ | grep Xcode
            set -o pipefail && env NSUnbufferedIO=YES xcodebuild build-for-testing -scheme SoundsKit -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
            bash <(curl -s https://codecov.io/bash)
       env: 
