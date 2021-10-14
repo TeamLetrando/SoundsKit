@@ -23,4 +23,6 @@ jobs:
         destination: ${{ matrix.destination}}
 
     - name: Run tests
-      run: swift test -v
+      run: |
+           pwd
+           set -o pipefail && env NSUnbufferedIO=YES xcodebuild test-without-building -scheme SoundsKit -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
