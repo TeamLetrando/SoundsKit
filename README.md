@@ -102,4 +102,4 @@ Drop the `SoundsKit.swift` file into your project, link against `AVFoundation.fr
 
 ## Licenses
 
-SoundsKit is licensed under the [MIT License](https://raw.githubusercontent.com/adamcichy/SoundsKit/master/LICENSE).
+SoundsKit is licensed under the [MIT License](https://raw.githubusercontent.com/TeamLetrando/SoundsKit/master/LICENSE).
