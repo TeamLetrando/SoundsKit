@@ -14,39 +14,38 @@ class SoundController: UIViewController, UITextFieldDelegate {
     
     lazy var textField:UITextField = {
         let textField =  UITextField(frame: CGRect(x: self.view.center.x - 100, y: self.view.center.y - 200, width: 200, height: 50))
-            textField.placeholder = "Palavra em português"
-            textField.font = UIFont.systemFont(ofSize: 15)
-            textField.borderStyle = UITextField.BorderStyle.roundedRect
-            textField.autocorrectionType = UITextAutocorrectionType.no
-            textField.keyboardType = UIKeyboardType.default
-            textField.returnKeyType = UIReturnKeyType.done
-            textField.clearButtonMode = UITextField.ViewMode.whileEditing
-            textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
-            
+        textField.placeholder = "Palavra em português"
+        textField.font = UIFont.systemFont(ofSize: 15)
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.autocorrectionType = UITextAutocorrectionType.no
+        textField.keyboardType = UIKeyboardType.default
+        textField.returnKeyType = UIReturnKeyType.done
+        textField.clearButtonMode = UITextField.ViewMode.whileEditing
+        textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        
         return textField
     }()
     
     lazy var soundButton:UIButton = {
         let button = UIButton(type: .system)
-            button.frame = CGRect(x: self.view.center.x - 50, y: self.view.center.y - 100, width: 100, height: 70)
-            button.backgroundColor = .white
-            button.layer.cornerRadius = 5
-            button.layer.borderWidth = 1
-            button.layer.borderColor = UIColor.black.cgColor
-            button.tintColor = .black
-            button.setBackgroundImage(UIImage(systemName: "play.circle"), for: .normal)
-            button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        button.frame = CGRect(x: self.view.center.x - 50, y: self.view.center.y - 100, width: 100, height: 70)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 5
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.black.cgColor
+        button.tintColor = .black
+        button.setBackgroundImage(UIImage(systemName: "play.circle"), for: .normal)
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         return button
     }()
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .gray
-        
-            textField.delegate = self
-            self.view.addSubview(soundButton)
-            self.view.addSubview(textField)
+        textField.delegate = self
+        self.view.addSubview(soundButton)
+        self.view.addSubview(textField)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -59,10 +58,9 @@ class SoundController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-
+    
     
     @objc func buttonAction(sender: UIButton!) {
-        //Play the sound
         if SoundsKit.audioIsOn() {
             sender.setBackgroundImage(UIImage(systemName: "stop.circle"), for: .normal)
             try? SoundsKit.play()
@@ -73,7 +71,7 @@ class SoundController: UIViewController, UITextFieldDelegate {
         }
         
     }
-
-
+    
+    
 }
 
