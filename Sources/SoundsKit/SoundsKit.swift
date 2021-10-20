@@ -1,35 +1,33 @@
 import AVFoundation
 import Foundation
 
-public class SoundsKit {
+open class SoundsKit {
     
-    var file: String
-    var fileExtension: String
+    ///Set sound `file` first play it
+    public static var file: String?
+    public static var fileExtension: String = "mp3"
     
-    var audioPlayer: AVAudioPlayer?
+    private static var audioPlayer: AVAudioPlayer?
     
-    let userDefaults = UserDefaults.standard
+    static let userDefaults = UserDefaults.standard
     
-    init(file: String, fileExtention: String) {
-        self.file = file
-        self.fileExtension = fileExtention
-    }
-    
-    ///
-    func setKeyAudio(_ key: Bool){
+    /// Set first time of sound
+    /// - Parameter key: Choose the first state of sound and add  this function into you launch funcion at AppDelegate
+    public static func setKeyAudio(_ key: Bool){
         userDefaults.set(key, forKey: "sound")
     }
 
     /// Globally check enable or disable sound.
-    func audioIsOn() -> Bool {
+    /// - Returns: Return `True` if sound is on or `False` if sound is off.
+    public static func audioIsOn() -> Bool {
         if userDefaults.object(forKey: "sound") == nil {
             setKeyAudio(true)
         }
         return userDefaults.bool(forKey: "sound")
     }
-    
     /// Play sound from a sound file.
-    func play(bundle: Bundle = Bundle.main) throws {
+    /// - Parameter bundle: It's for default a main bundle, but if you need to customize, it's possible with this parameter.
+    public static func play(bundle: Bundle = .main) throws {
             /// Sound session. The default value is the shared `AVAudioSession` session with `ambient` category.
             let audioSession = AVAudioSession.sharedInstance()
             try audioSession.setCategory(.ambient)
@@ -41,27 +39,29 @@ public class SoundsKit {
             audioPlayer = try AVAudioPlayer(contentsOf: url)
             audioPlayer?.numberOfLoops = -1
             audioPlayer?.prepareToPlay()
-            setKeyAudio(true)
             audioPlayer?.play()
+            setKeyAudio(false)
         } catch {
             throw ErrorSound.failedSetAudio
         }
     }
     
     /// Stop playing the sound.
-    func stop() {
-        setKeyAudio(false)
+    public static func stop() {
         audioPlayer?.stop()
+        setKeyAudio(true)
     }
-    
+
     /// Reproduce speech from a word or letter.
+    /// - Parameters:
+    ///   - text: the text if you want to speech
+    ///   - language: It's for default a  `Portuguese language`, but if you need to customize, it's possible with this parameter.
     @discardableResult
-    func reproduceSpeech(_ text:String, language: String = "pt-BR", delegate: AVSpeechSynthesizerDelegate? = nil) -> AVSpeechSynthesizer {
+    public static func reproduceSpeech(_ text: String, language: String = "pt-BR") -> AVSpeechSynthesizer {
         let utterance =  AVSpeechUtterance(string: text)
         let voice = AVSpeechSynthesisVoice(language: language)
         utterance.voice = voice
         let synthesizer = AVSpeechSynthesizer()
-        synthesizer.delegate = delegate
         synthesizer.speak(utterance)
         return synthesizer
     }

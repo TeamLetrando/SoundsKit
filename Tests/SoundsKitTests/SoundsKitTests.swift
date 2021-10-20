@@ -11,7 +11,8 @@ final class SoundsKitTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        soundKit = SoundsKit(file: "", fileExtention: "")
+        SoundsKit.file = ""
+        SoundsKit.fileExtension = ""
     }
     
     override func tearDown() {
@@ -25,7 +26,7 @@ final class SoundsKitTests: XCTestCase {
         //Given
         userDefaults.set(false, forKey: "sound")
         //When
-        soundKit?.setKeyAudio(true)
+        SoundsKit.setKeyAudio(true)
         //Then
         XCTAssertTrue((userDefaults.value(forKey: "sound") != nil))
     }
@@ -34,24 +35,24 @@ final class SoundsKitTests: XCTestCase {
         //Given
         userDefaults.set(true, forKey: "sound")
         //When
-        soundKit?.setKeyAudio(false)
+        SoundsKit.setKeyAudio(false)
         //Then
-        XCTAssertEqual(soundKit?.audioIsOn(), false)
+        XCTAssertEqual(SoundsKit.audioIsOn(), false)
     }
     
     //MARK: audioIsOn function test
     func test_audioIsOn_trueCondicional() {
         //Given
-        soundKit?.setKeyAudio(true)
-        let sut = soundKit?.audioIsOn()
+        SoundsKit.setKeyAudio(true)
+        let sut = SoundsKit.audioIsOn()
         //Then
         XCTAssertTrue(try XCTUnwrap(sut))
     }
     
     func test_audioIsOn_falseCondicional() {
         //Given
-        soundKit?.setKeyAudio(false)
-        let sut = soundKit?.audioIsOn()
+        SoundsKit.setKeyAudio(false)
+        let sut = SoundsKit.audioIsOn()
         //Then
         XCTAssertFalse(try XCTUnwrap(sut))
     }
@@ -60,7 +61,7 @@ final class SoundsKitTests: XCTestCase {
         //Given
         userDefaults.removeObject(forKey: "sound")
         userDefaults.synchronize()
-        let sut = soundKit?.audioIsOn()
+        let sut = SoundsKit.audioIsOn()
         //Then
         XCTAssertTrue(try XCTUnwrap(sut))
     }
@@ -68,16 +69,18 @@ final class SoundsKitTests: XCTestCase {
     //MARK: Play function test
     func test_play() {
         //Given
-        soundKit = SoundsKit(file: "test", fileExtention: "wav")
+        SoundsKit.file = "test"
+        SoundsKit.fileExtension = "wav"
         //Then
-        XCTAssertNoThrow(try soundKit?.play(bundle: bundle))
+        XCTAssertNoThrow(try SoundsKit.play(bundle: bundle))
     }
     
     func test_play_withError() {
         //Given
-        soundKit = SoundsKit(file: "nonexistent", fileExtention: "wav")
+        SoundsKit.file = "nonexistent"
+        SoundsKit.fileExtension = "wav"
         //When
-        XCTAssertThrowsError(try soundKit?.play(bundle: bundle)) { error in
+        XCTAssertThrowsError(try SoundsKit.play(bundle: bundle)) { error in
         //Then
             XCTAssertEqual(error as! ErrorSound, ErrorSound.failedBundle)
         }
@@ -85,9 +88,10 @@ final class SoundsKitTests: XCTestCase {
     
     func test_play_withErrorBundle() {
         //Given
-        soundKit = SoundsKit(file: "nonexistent", fileExtention: "wav")
+        SoundsKit.file = "nonexistent"
+        SoundsKit.fileExtension = "wav"
         //When
-        XCTAssertThrowsError(try soundKit?.play()) { error in
+        XCTAssertThrowsError(try SoundsKit.play()) { error in
         //Then
             XCTAssertEqual(error as! ErrorSound, ErrorSound.failedBundle)
         }
@@ -95,9 +99,10 @@ final class SoundsKitTests: XCTestCase {
     
     func test_play_withErrorFileExtension() {
         //Given
-        soundKit = SoundsKit(file: "corrupt", fileExtention: "pdf")
+        SoundsKit.file = "corrupt"
+        SoundsKit.fileExtension = "pdf"
         //When
-        XCTAssertThrowsError(try soundKit?.play(bundle: bundle)) { error in
+        XCTAssertThrowsError(try SoundsKit.play(bundle: bundle)) { error in
             //Then
             XCTAssertEqual(error as! ErrorSound, ErrorSound.failedSetAudio)
         }
@@ -122,15 +127,16 @@ final class SoundsKitTests: XCTestCase {
     //MARK: Stop function test
     func test_stop() {
         //Given
-        soundKit = SoundsKit(file: "test", fileExtention: "wav")
+        SoundsKit.file = "test"
+        SoundsKit.fileExtension = "wav"
         //When
-        try? soundKit?.play(bundle: bundle)
-        let sutOn = soundKit?.audioIsOn()
-        XCTAssertTrue(try XCTUnwrap(sutOn))
-        soundKit?.stop()
-        let sutOff = soundKit?.audioIsOn()
+        try? SoundsKit.play(bundle: bundle)
+        let sutOn = SoundsKit.audioIsOn()
+        XCTAssertFalse(try XCTUnwrap(sutOn))
+        SoundsKit.stop()
+        let sutOff = SoundsKit.audioIsOn()
         //Then
-        XCTAssertFalse(try XCTUnwrap(sutOff))
+        XCTAssertTrue(try XCTUnwrap(sutOff))
     }
 
     //MARK: Reproduce Speech function test
@@ -138,10 +144,10 @@ final class SoundsKitTests: XCTestCase {
         //Given
         let word = "A casa é bela"
         //When
-        let synthesizer = soundKit?.reproduceSpeech(word)
-        soundKit?.reproduceSpeech(word)
+        let synthesizer = SoundsKit.reproduceSpeech(word)
+        SoundsKit.reproduceSpeech(word)
         //Then
-        XCTAssertFalse(try XCTUnwrap(synthesizer?.isPaused))
+        XCTAssertFalse(try XCTUnwrap(synthesizer.isPaused))
     }
 
     func testPerformanceExample() throws {

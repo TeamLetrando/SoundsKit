@@ -1,10 +1,11 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "SoundsKit",
+    platforms: [.iOS(.v13)],
     products: [
         .library(
             name: "SoundsKit",
@@ -15,7 +16,8 @@ let package = Package(
     targets: [
         .target(
             name: "SoundsKit",
-            dependencies: []),
+            dependencies: [],
+            path: "Sources"),
         .testTarget(
             name: "SoundsKitTests",
             dependencies: ["SoundsKit"],
