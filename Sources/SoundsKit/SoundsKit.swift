@@ -40,7 +40,7 @@ open class SoundsKit {
             audioPlayer?.numberOfLoops = -1
             audioPlayer?.prepareToPlay()
             audioPlayer?.play()
-            setKeyAudio(false)
+            setKeyAudio(true)
         } catch {
             throw ErrorSound.failedSetAudio
         }
@@ -49,7 +49,13 @@ open class SoundsKit {
     /// Stop playing the sound.
     public static func stop() {
         audioPlayer?.stop()
-        setKeyAudio(true)
+        setKeyAudio(false)
+    }
+    
+    /// Pause playing the sound.
+    public static func pause() {
+        audioPlayer?.pause()
+        setKeyAudio(false)
     }
 
     /// Reproduce speech from a word or letter.
