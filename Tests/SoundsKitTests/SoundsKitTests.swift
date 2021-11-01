@@ -2,7 +2,6 @@ import XCTest
 @testable import SoundsKit
 
 final class SoundsKitTests: XCTestCase {
-    //let userDefaults = UserDefaults.standard
     var soundKit: SoundsKit?
     
     let userDefaults = UserDefaults.standard
@@ -132,11 +131,11 @@ final class SoundsKitTests: XCTestCase {
         //When
         try? SoundsKit.play(bundle: bundle)
         let sutOn = SoundsKit.audioIsOn()
-        XCTAssertFalse(try XCTUnwrap(sutOn))
+        XCTAssertTrue(try XCTUnwrap(sutOn))
         SoundsKit.stop()
         let sutOff = SoundsKit.audioIsOn()
         //Then
-        XCTAssertTrue(try XCTUnwrap(sutOff))
+        XCTAssertFalse(try XCTUnwrap(sutOff))
     }
 
     //MARK: Reproduce Speech function test
