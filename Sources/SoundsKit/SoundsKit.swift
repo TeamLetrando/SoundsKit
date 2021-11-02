@@ -28,13 +28,13 @@ open class SoundsKit {
     /// Play sound from a sound file.
     /// - Parameter bundle: It's for default a main bundle, but if you need to customize, it's possible with this parameter.
     public static func play(bundle: Bundle = .main) throws {
-            /// Sound session. The default value is the shared `AVAudioSession` session with `ambient` category.
-            let audioSession = AVAudioSession.sharedInstance()
-            try audioSession.setCategory(.playback)
-            try audioSession.setActive(true)
+        /// Sound session. The default value is the shared `AVAudioSession` session with `ambient` category.
+        let audioSession = AVAudioSession.sharedInstance()
+        try audioSession.setCategory(.playback, mode: .default, options: [.mixWithOthers, .allowAirPlay])
+        try audioSession.setActive(true)
         guard let url = bundle.url(forResource: file, withExtension: fileExtension) else {
-                throw ErrorSound.failedBundle
-            }
+            throw ErrorSound.failedBundle
+        }
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: url)
             audioPlayer?.numberOfLoops = -1
