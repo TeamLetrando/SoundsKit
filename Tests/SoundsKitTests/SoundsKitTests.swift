@@ -17,6 +17,7 @@ final class SoundsKitTests: XCTestCase {
     override func tearDown() {
         soundKit = nil
         userDefaults.removeObject(forKey: "sound")
+        userDefaults.removeObject(forKey: "timeSound")
         userDefaults.synchronize()
     }
     
@@ -30,13 +31,25 @@ final class SoundsKitTests: XCTestCase {
         XCTAssertTrue((userDefaults.value(forKey: "sound") != nil))
     }
     
-    func test_setKeyAudio_falseKey(){
+    func test_setKeyAudio_falseKey() {
         //Given
         userDefaults.set(true, forKey: "sound")
         //When
         SoundsKit.setKeyAudio(false)
         //Then
         XCTAssertEqual(SoundsKit.audioIsOn(), false)
+    }
+    
+    //MARK: setTimeAudio function test
+    func test_setTimeSound() {
+    //Given
+    SoundsKit.file = "test"
+    SoundsKit.fileExtension = "wav"
+    try? SoundsKit.play()
+    //When
+    SoundsKit.pause()
+    //Then
+    XCTAssertNotNil(userDefaults.value(forKey: "timeSound"))
     }
     
     //MARK: audioIsOn function test
@@ -133,6 +146,21 @@ final class SoundsKitTests: XCTestCase {
         let sutOn = SoundsKit.audioIsOn()
         XCTAssertTrue(try XCTUnwrap(sutOn))
         SoundsKit.stop()
+        let sutOff = SoundsKit.audioIsOn()
+        //Then
+        XCTAssertFalse(try XCTUnwrap(sutOff))
+    }
+    
+    //MARK: Stop function test
+    func test_pause() {
+        //Given
+        SoundsKit.file = "test"
+        SoundsKit.fileExtension = "wav"
+        //When
+        try? SoundsKit.play(bundle: bundle)
+        let sutOn = SoundsKit.audioIsOn()
+        XCTAssertTrue(try XCTUnwrap(sutOn))
+        SoundsKit.pause()
         let sutOff = SoundsKit.audioIsOn()
         //Then
         XCTAssertFalse(try XCTUnwrap(sutOff))

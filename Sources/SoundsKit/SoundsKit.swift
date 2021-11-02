@@ -39,7 +39,8 @@ open class SoundsKit {
             audioPlayer = try AVAudioPlayer(contentsOf: url)
             audioPlayer?.numberOfLoops = -1
             audioPlayer?.prepareToPlay()
-            audioPlayer?.play()
+            let time: TimeInterval = whatTimeSound()
+            audioPlayer?.play(atTime: time)
             setKeyAudio(true)
         } catch {
             throw ErrorSound.failedSetAudio
@@ -50,12 +51,29 @@ open class SoundsKit {
     public static func stop() {
         audioPlayer?.stop()
         setKeyAudio(false)
+        setTimeSound()
+    }
+    
+    /// Set time of sound
+    /// - Parameter key: Choose the first time of sound and add  this time interval into your pause music function
+    private static func setTimeSound(){
+        guard let timer = audioPlayer?.currentTime else {return}
+        userDefaults.set(timer, forKey: "timeSound")
+    }
+
+    /// - Returns: Return the time interval of current music playing.
+    private static func whatTimeSound() -> Double {
+        if userDefaults.object(forKey: "timeSound") == nil {
+            setTimeSound()
+        }
+        return userDefaults.double(forKey: "timeSound")
     }
     
     /// Pause playing the sound.
-    public static func pause() {
+    public static func pause(){
         audioPlayer?.pause()
         setKeyAudio(false)
+        setTimeSound()
     }
 
     /// Reproduce speech from a word or letter.
