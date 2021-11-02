@@ -41,6 +41,7 @@ class SoundController: UIViewController, UITextFieldDelegate {
     
     
     override func viewDidLoad() {
+        SoundsKit.audioIsOn() ? try? SoundsKit.play() : SoundsKit.pause()
         super.viewDidLoad()
         self.view.backgroundColor = .gray
         textField.delegate = self
@@ -63,11 +64,10 @@ class SoundController: UIViewController, UITextFieldDelegate {
     @objc func buttonAction(sender: UIButton!) {
         if SoundsKit.audioIsOn() {
             sender.setBackgroundImage(UIImage(systemName: "stop.circle"), for: .normal)
-            try? SoundsKit.play()
+            SoundsKit.pause()
         } else {
             sender.setBackgroundImage(UIImage(systemName: "play.circle"), for: .normal)
-            SoundsKit.stop()
-            
+            try? SoundsKit.play()
         }
         
     }
