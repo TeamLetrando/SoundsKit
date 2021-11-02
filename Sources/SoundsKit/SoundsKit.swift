@@ -49,9 +49,9 @@ open class SoundsKit {
     
     /// Stop playing the sound.
     public static func stop() {
+        setTimeSound()
         audioPlayer?.stop()
         setKeyAudio(false)
-        setTimeSound()
     }
     
     /// Set time of sound
@@ -63,17 +63,15 @@ open class SoundsKit {
 
     /// - Returns: Return the time interval of current music playing.
     private static func whatTimeSound() -> Double {
-        if userDefaults.object(forKey: "timeSound") == nil {
-            setTimeSound()
-        }
         return userDefaults.double(forKey: "timeSound")
     }
     
     /// Pause playing the sound.
     public static func pause(){
+        setTimeSound()
         audioPlayer?.pause()
         setKeyAudio(false)
-        setTimeSound()
+        
     }
 
     /// Reproduce speech from a word or letter.
