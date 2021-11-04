@@ -45,10 +45,57 @@ open class SoundsKit {
             throw ErrorSound.failedSetAudio
         }
     }
+   
+    /// Play sound for background Letrando ABC.
+    public static func playBackgroundLetrando() throws {
+            /// Sound session. The default value is the shared `AVAudioSession` session with `ambient` category.
+            let audioSession = AVAudioSession.sharedInstance()
+            try audioSession.setCategory(.ambient)
+            try audioSession.setActive(true)
+        guard let url = Bundle.module.url(forResource: "Curious_Kiddo", withExtension: "mp3") else {return}
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.stop()
+            audioPlayer?.numberOfLoops = -1
+            audioPlayer?.prepareToPlay()
+            audioPlayer?.play()
+            setKeyAudio(false)
+        } catch {
+            throw ErrorSound.failedSetAudio
+        }
+    }
+    
+    /// Play sound for background Letrando ABC.
+    public static func playOnboardingLetrando(at index: Int) throws {
+            /// Sound session. The default value is the shared `AVAudioSession` session with `ambient` category.
+            let audioSession = AVAudioSession.sharedInstance()
+            try audioSession.setCategory(.ambient)
+            try audioSession.setActive(true)
+        guard let url = Bundle.module.url(forResource: "onboarding\(index)", withExtension: "wav") else {
+                throw ErrorSound.failedBundle
+            }
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.stop()
+            audioPlayer?.numberOfLoops = 1
+            audioPlayer?.prepareToPlay()
+            audioPlayer?.play()
+            setKeyAudio(false)
+        } catch {
+            throw ErrorSound.failedSetAudio
+        }
+    }
+    
     
     /// Stop playing the sound.
     public static func stop() {
         audioPlayer?.stop()
+        setKeyAudio(true)
+    }
+    
+    /// Pause playing the sound.
+    public static func pause() {
+        audioPlayer?.pause()
         setKeyAudio(true)
     }
 
