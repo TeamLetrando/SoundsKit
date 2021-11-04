@@ -24,8 +24,15 @@ Creating an instance has more benefits in managing your app sounds.
 
 ##### Static methods
 
+Play sound:
+
 ```swift
 SoundsKit.play()
+```
+Pause currently playing sound:
+
+```swift
+SoundsKit.pause()
 ```
 
 Stop currently playing sound:
@@ -34,7 +41,7 @@ Stop currently playing sound:
 SoundsKit.stop()
 ```
 
-CPlay speech in any language. The default value is "pt-BR".
+Play speech in any language. The default value is "pt-BR".
 
 ```swift
 SoundsKit.reproduceSpeech(_ text: String, language: String)
@@ -55,8 +62,23 @@ Check enable/disable sound:
 SoundsKit.audioIsOn()
 ```
 
+## Team Letrando ABC
+There are some functions for Letrando app.
+
+Play Background Sound Letrando ABC:
+
+```swift
+SoundsKit.playBackgroundLetrando()
+```
+
+Play Onboarding Sound Letrando ABC:
+
+```swift
+SoundsKit.playOnboardingLetrando(at index: Int)
+```
+
 ## Features
-- [x] Ability to pause and resume
+- [x] Ability to resume
 - [x] Adjusting sound volume
 
 
@@ -86,7 +108,10 @@ let package = Package(
     targets: [
         .target(
             name: "SoundsKit",
-            dependencies: []),
+            dependencies: [],
+            path: "Sources",
+            resources: [.process("SoundsKit/Resources/onboarding0.wav"),.process("SoundsKit/Resources/onboarding1.wav"),
+                        .process("SoundsKit/Resources/onboarding2.wav"), .process("SoundsKit/Resources/Curious_Kiddo.mp3")]),
         .testTarget(
             name: "SoundsKitTests",
             dependencies: ["SoundsKit"],

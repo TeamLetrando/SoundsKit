@@ -108,6 +108,37 @@ final class SoundsKitTests: XCTestCase {
         }
     }
     
+    //MARK: Check Play Background Function Letrando
+    func test_playBackgroundLetrando() {
+        //When
+        try? SoundsKit.playBackgroundLetrando()
+        //Then
+        XCTAssertEqual(SoundsKit.audioIsOn(), false)
+        
+    }
+    
+    //MARK: Check Play Onboarding Function Letrando
+    func test_playOnboardingLetrando() {
+        //Given
+        let index = 0
+        //When
+        try? SoundsKit.playOnboardingLetrando(at: index)
+        //Then
+        XCTAssertEqual(SoundsKit.audioIsOn(), false)
+        
+    }
+    
+    func test_playOnboardingLetrando_withErrorFileExtension() {
+        //Given
+        let index = 6
+        //When
+        XCTAssertThrowsError(try SoundsKit.playOnboardingLetrando(at: index)) { error in
+            //Then
+            XCTAssertEqual(error as! ErrorSound, ErrorSound.failedBundle)
+        }
+    }
+    
+    
     //MARK: Check sound file
     func test_file_created() {
         //Given
@@ -138,6 +169,22 @@ final class SoundsKitTests: XCTestCase {
         //Then
         XCTAssertTrue(try XCTUnwrap(sutOff))
     }
+    
+    //MARK: Pause function test
+    func test_pause() {
+        //Given
+        SoundsKit.file = "test"
+        SoundsKit.fileExtension = "wav"
+        //When
+        try? SoundsKit.play(bundle: bundle)
+        let sutOn = SoundsKit.audioIsOn()
+        XCTAssertFalse(try XCTUnwrap(sutOn))
+        SoundsKit.pause()
+        let sutOff = SoundsKit.audioIsOn()
+        //Then
+        XCTAssertTrue(try XCTUnwrap(sutOff))
+    }
+
 
     //MARK: Reproduce Speech function test
     func test_reproduceSpeech_withoutError() {

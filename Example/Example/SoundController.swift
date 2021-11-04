@@ -63,7 +63,7 @@ class SoundController: UIViewController, UITextFieldDelegate {
     @objc func buttonAction(sender: UIButton!) {
         if SoundsKit.audioIsOn() {
             sender.setBackgroundImage(UIImage(systemName: "stop.circle"), for: .normal)
-            try? SoundsKit.play()
+            try? SoundsKit.playBackgroundLetrando()
         } else {
             sender.setBackgroundImage(UIImage(systemName: "play.circle"), for: .normal)
             SoundsKit.stop()

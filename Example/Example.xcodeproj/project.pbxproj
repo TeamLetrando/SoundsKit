@@ -13,7 +13,6 @@
 		7B5303BA27144AA100231AE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B5303B927144AA100231AE7 /* Assets.xcassets */; };
 		7B5303BD27144AA100231AE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B5303BB27144AA100231AE7 /* LaunchScreen.storyboard */; };
 		7B5303D0271466DE00231AE7 /* SoundsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7B5303CF271466DE00231AE7 /* SoundsKit */; };
-		7B5303D22714683C00231AE7 /* Curious_Kiddo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7B5303D12714683C00231AE7 /* Curious_Kiddo.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +23,6 @@
 		7B5303B927144AA100231AE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B5303BC27144AA100231AE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B5303BE27144AA100231AE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7B5303D12714683C00231AE7 /* Curious_Kiddo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Curious_Kiddo.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +56,6 @@
 		7B5303AF27144A9F00231AE7 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				7B5303D32714684200231AE7 /* Sound */,
 				7B5303B027144A9F00231AE7 /* AppDelegate.swift */,
 				7B5303B227144A9F00231AE7 /* SceneDelegate.swift */,
 				7B5303B427144A9F00231AE7 /* SoundController.swift */,
@@ -67,14 +64,6 @@
 				7B5303BE27144AA100231AE7 /* Info.plist */,
 			);
 			path = Example;
-			sourceTree = "<group>";
-		};
-		7B5303D32714684200231AE7 /* Sound */ = {
-			isa = PBXGroup;
-			children = (
-				7B5303D12714683C00231AE7 /* Curious_Kiddo.mp3 */,
-			);
-			path = Sound;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,7 +132,6 @@
 			files = (
 				7B5303BD27144AA100231AE7 /* LaunchScreen.storyboard in Resources */,
 				7B5303BA27144AA100231AE7 /* Assets.xcassets in Resources */,
-				7B5303D22714683C00231AE7 /* Curious_Kiddo.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,7 +360,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/TeamLetrando/SoundsKit";
 			requirement = {
-				branch = feature/addSPM;
+				branch = feature/addNewsFunctions;
 				kind = branch;
 			};
 		};
