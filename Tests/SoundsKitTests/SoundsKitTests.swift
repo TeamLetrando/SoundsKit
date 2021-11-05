@@ -128,6 +128,16 @@ final class SoundsKitTests: XCTestCase {
         }
     }
     
+    func test_playOnboardingLetrando() {
+        //Given
+        let index = 1
+        //When
+        try? SoundsKit.playOnboardingLetrando(at: index)
+        //Then
+        XCTAssertEqual(SoundsKit.audioIsOn(), true)
+        
+    }
+    
     //MARK: Check sound file
     func test_file_created() {
         //Given

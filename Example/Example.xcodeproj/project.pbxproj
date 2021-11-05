@@ -360,7 +360,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/TeamLetrando/SoundsKit";
 			requirement = {
-				branch = feature/addNewsFunctions;
+				branch = main;
 				kind = branch;
 			};
 		};

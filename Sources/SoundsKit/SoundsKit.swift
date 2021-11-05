@@ -80,6 +80,7 @@ open class SoundsKit {
             audioPlayer?.numberOfLoops = 1
             audioPlayer?.prepareToPlay()
             audioPlayer?.play()
+            setKeyAudio(true)
         } catch {
             throw ErrorSound.failedSetAudio
         }
