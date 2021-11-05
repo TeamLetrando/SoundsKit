@@ -131,10 +131,11 @@ final class SoundsKitTests: XCTestCase {
     func test_playOnboardingLetrando() {
         //Given
         let index = 1
+        let bool = !SoundsKit.audioIsOn()
         //When
         try? SoundsKit.playOnboardingLetrando(at: index)
         //Then
-        XCTAssertEqual(SoundsKit.audioIsOn(), true)
+        XCTAssertEqual(SoundsKit.audioIsOn(), bool)
         
     }
     

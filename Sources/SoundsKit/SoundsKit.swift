@@ -80,7 +80,7 @@ open class SoundsKit {
             audioPlayer?.numberOfLoops = 1
             audioPlayer?.prepareToPlay()
             audioPlayer?.play()
-            setKeyAudio(true)
+            SoundsKit.audioIsOn() ? try? SoundsKit.playBackgroundLetrando() : SoundsKit.pause()
         } catch {
             throw ErrorSound.failedSetAudio
         }
