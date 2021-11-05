@@ -131,25 +131,55 @@ final class SoundsKitTests: XCTestCase {
     
     func test_playOnboardingLetrando() {
         //Given
-        let index = 1
+        let sut = 1
         //When
-        try? SoundsKit.playOnboardingLetrando(at: index)
+        try? SoundsKit.playOnboardingLetrando(at: sut)
         //Then
         XCTAssertEqual(SoundsKit.audioIsOn(), true)
     }
     
     func test_finishOnboarding_falseCondicional() {
         //Given
-        let index = 3
+        let sut = 3
+        //When
+        SoundsKit.finishOnboarding(at: sut)
         //Then
-        XCTAssertEqual(SoundsKit.finishOnboarding(at: index) && SoundsKit.audioIsOn(), false)
+        XCTAssertEqual(SoundsKit.audioIsOn(), false)
     }
     
     func test_finishOnboarding_trueCondicional() {
         //Given
-        let index = 1
+        let sut = 1
+        //When
+        SoundsKit.finishOnboarding(at: sut)
         //Then
-        XCTAssertEqual(SoundsKit.finishOnboarding(at: index) && SoundsKit.audioIsOn(), false)
+        XCTAssertEqual(SoundsKit.audioIsOn(), true)
+    }
+    
+    func test_isFinishOnboarding_trueCondicional() {
+        //Given
+        let sut = 3
+        //When
+        SoundsKit.finishOnboarding(at: sut)
+        //Then
+        XCTAssertTrue(SoundsKit.isFinishOnboarding())
+    }
+    
+    func test_isFinishOnboarding_falseCondicional() {
+        //Given
+        let sut = 1
+        //When
+        SoundsKit.finishOnboarding(at: sut)
+        //Then
+        XCTAssertFalse(SoundsKit.isFinishOnboarding())
+    }
+    
+    func test_isFinishOnboarding_nilCondicional() {
+        //Given
+        userDefaults.removeObject(forKey: "onboarding")
+        userDefaults.synchronize()
+        //Then
+        XCTAssertFalse(SoundsKit.isFinishOnboarding())
     }
     
     //MARK: Check sound file
