@@ -80,15 +80,11 @@ open class SoundsKit {
             audioPlayer?.numberOfLoops = 1
             audioPlayer?.prepareToPlay()
             audioPlayer?.play()
-            if index == 3 {
-                setKeyAudio(false)
-            }
         } catch {
             throw ErrorSound.failedSetAudio
         }
     }
-    
-    
+
     /// Stop playing the sound.
     public static func stop() {
         audioPlayer?.stop()

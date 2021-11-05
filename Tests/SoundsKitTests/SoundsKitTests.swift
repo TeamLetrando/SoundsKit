@@ -118,16 +118,6 @@ final class SoundsKitTests: XCTestCase {
     }
     
     //MARK: Check Play Onboarding Function Letrando
-    func test_playOnboardingLetrando() {
-        //Given
-        let index = 0
-        //When
-        try? SoundsKit.playOnboardingLetrando(at: index)
-        //Then
-        XCTAssertEqual(SoundsKit.audioIsOn(), false)
-        
-    }
-    
     func test_playOnboardingLetrando_withErrorFileExtension() {
         //Given
         let index = 6
@@ -137,7 +127,6 @@ final class SoundsKitTests: XCTestCase {
             XCTAssertEqual(error as! ErrorSound, ErrorSound.failedBundle)
         }
     }
-    
     
     //MARK: Check sound file
     func test_file_created() {
