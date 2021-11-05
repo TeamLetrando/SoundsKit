@@ -18,6 +18,7 @@ final class SoundsKitTests: XCTestCase {
     override func tearDown() {
         soundKit = nil
         userDefaults.removeObject(forKey: "sound")
+        userDefaults.removeObject(forKey: "onboarding")
         userDefaults.synchronize()
     }
     
@@ -131,12 +132,28 @@ final class SoundsKitTests: XCTestCase {
     func test_playOnboardingLetrando() {
         //Given
         let index = 1
-        let bool = !SoundsKit.audioIsOn()
         //When
         try? SoundsKit.playOnboardingLetrando(at: index)
         //Then
-        XCTAssertEqual(SoundsKit.audioIsOn(), bool)
-        
+        XCTAssertEqual(SoundsKit.audioIsOn(), true)
+    }
+    
+    func test_finishOnboarding_falseCondicional() {
+        //Given
+        let index = 3
+        //When
+        SoundsKit.finishOnboarding(at: index)
+        //Then
+        XCTAssertEqual(SoundsKit.audioIsOn(), false)
+    }
+    
+    func test_finishOnboarding_trueCondicional() {
+        //Given
+        let index = 1
+        //When
+        SoundsKit.finishOnboarding(at: index)
+        //Then
+        XCTAssertEqual(SoundsKit.audioIsOn(), true)
     }
     
     //MARK: Check sound file

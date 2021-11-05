@@ -76,13 +76,21 @@ open class SoundsKit {
             }
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: url)
-            audioPlayer?.stop()
+            SoundsKit.pause()
             audioPlayer?.numberOfLoops = 1
             audioPlayer?.prepareToPlay()
             audioPlayer?.play()
-            SoundsKit.audioIsOn() ? try? SoundsKit.playBackgroundLetrando() : SoundsKit.pause()
         } catch {
             throw ErrorSound.failedSetAudio
+        }
+    }
+    
+    public static func finishOnboarding(at index: Int) {
+        switch index {
+        case 3:
+            SoundsKit.audioIsOn() ? try? SoundsKit.playBackgroundLetrando() : SoundsKit.pause()
+        default:
+            break
         }
     }
 
