@@ -85,13 +85,15 @@ open class SoundsKit {
         }
     }
     
-    public static func finishOnboarding(at index: Int) {
+    public static func finishOnboarding(at index: Int) -> Bool {
         switch index {
         case 3:
+            userDefaults.set(true, forKey: "onboarding")
             SoundsKit.audioIsOn() ? try? SoundsKit.playBackgroundLetrando() : SoundsKit.pause()
         default:
-            break
+            userDefaults.set(false, forKey: "onboarding")
         }
+        return userDefaults.bool(forKey: "onboarding")
     }
 
     /// Stop playing the sound.

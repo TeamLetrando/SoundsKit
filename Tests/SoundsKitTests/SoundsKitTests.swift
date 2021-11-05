@@ -141,19 +141,15 @@ final class SoundsKitTests: XCTestCase {
     func test_finishOnboarding_falseCondicional() {
         //Given
         let index = 3
-        //When
-        SoundsKit.finishOnboarding(at: index)
         //Then
-        XCTAssertEqual(SoundsKit.audioIsOn(), false)
+        XCTAssertEqual(SoundsKit.finishOnboarding(at: index) && SoundsKit.audioIsOn(), false)
     }
     
     func test_finishOnboarding_trueCondicional() {
         //Given
         let index = 1
-        //When
-        SoundsKit.finishOnboarding(at: index)
         //Then
-        XCTAssertEqual(SoundsKit.audioIsOn(), true)
+        XCTAssertEqual(SoundsKit.finishOnboarding(at: index) && SoundsKit.audioIsOn(), false)
     }
     
     //MARK: Check sound file
