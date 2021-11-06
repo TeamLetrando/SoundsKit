@@ -76,7 +76,7 @@ open class SoundsKit {
             }
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: url)
-            SoundsKit.pause()
+            audioPlayer?.pause()
             audioPlayer?.numberOfLoops = 1
             audioPlayer?.prepareToPlay()
             audioPlayer?.play()
