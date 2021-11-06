@@ -2,13 +2,15 @@ import AVFoundation
 import Foundation
 import SwiftUI
 
-open class SoundsKit {
+open class SoundsKit{
     
     ///Set sound `file` first play it
     public static var file: String?
     public static var fileExtension: String = "mp3"
     
     private static var audioPlayer: AVAudioPlayer?
+    private static var player: AVPlayer?
+    private static var bundle = Bundle.module
     
     static let userDefaults = UserDefaults.standard
     
@@ -53,7 +55,7 @@ open class SoundsKit {
             let audioSession = AVAudioSession.sharedInstance()
             try audioSession.setCategory(.ambient)
             try audioSession.setActive(true)
-        guard let url = Bundle.module.url(forResource: "Curious_Kiddo", withExtension: "mp3") else {return}
+        guard let url = bundle.url(forResource: "Curious_Kiddo", withExtension: "mp3") else {return}
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: url)
             audioPlayer?.stop()
@@ -73,7 +75,7 @@ open class SoundsKit {
             let audioSession = AVAudioSession.sharedInstance()
             try audioSession.setCategory(.ambient)
             try audioSession.setActive(true)
-        guard let url = Bundle.module.url(forResource: "onboarding\(index)", withExtension: "wav") else {
+        guard let url = bundle.url(forResource: "onboarding\(index)", withExtension: "wav") else {
                 throw ErrorSound.failedBundle
             }
         do {
@@ -86,7 +88,8 @@ open class SoundsKit {
             throw ErrorSound.failedSetAudio
         }
     }
-    
+    /// Control Onboarding finish Letrando ABC.
+    /// - Parameter at: Select the audio for each page onboarding
     public static func finishOnboarding(at index: Int){
         switch index {
         case 3:
@@ -97,13 +100,32 @@ open class SoundsKit {
         }
     }
     
+    /// Acess for Control Onboarding finish Letrando ABC.
     public static func isFinishOnboarding() -> Bool {
         if userDefaults.object(forKey: "onboarding") == nil {
             userDefaults.set(false, forKey: "onboarding")
         }
         return userDefaults.bool(forKey: "onboarding")
     }
-
+    
+    public static func playAlert() throws {
+        /// Sound session. The default value is the shared `AVAudioSession` session with `ambient` category.
+        let audioSession = AVAudioSession.sharedInstance()
+        try audioSession.setCategory(.ambient)
+        try audioSession.setActive(true)
+        guard let url = bundle.url(forResource: "audio01", withExtension: "wav") else {
+            throw ErrorSound.failedBundle
+        }
+        do {
+            player = AVPlayer(url: url)
+            player?.allowsExternalPlayback = true
+            if ((audioPlayer?.isPlaying) != nil) {
+                audioPlayer?.setVolume(0.5, fadeDuration: 0.7)
+            }
+            player?.play()
+        }
+    }
+    
     /// Stop playing the sound.
     public static func stop() {
         audioPlayer?.stop()

@@ -181,7 +181,7 @@ final class SoundsKitTests: XCTestCase {
         //Then
         XCTAssertFalse(SoundsKit.isFinishOnboarding())
     }
-    
+
     //MARK: Check sound file
     func test_file_created() {
         //Given
