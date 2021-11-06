@@ -1,5 +1,6 @@
 import AVFoundation
 import Foundation
+import SwiftUI
 
 open class SoundsKit {
     
@@ -66,6 +67,7 @@ open class SoundsKit {
     }
     
     /// Play sound for background Letrando ABC.
+    /// - Parameter at: Select the audio for each page onboarding
     public static func playOnboardingLetrando(at index: Int) throws {
             /// Sound session. The default value is the shared `AVAudioSession` session with `ambient` category.
             let audioSession = AVAudioSession.sharedInstance()
