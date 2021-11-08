@@ -131,45 +131,45 @@ final class SoundsKitTests: XCTestCase {
     
     func test_playOnboardingLetrando() {
         //Given
-        let sut = 1
+        let numberOfSoundOnboarding = 1
         //When
-        try? SoundsKit.playOnboardingLetrando(at: sut)
+        try? SoundsKit.playOnboardingLetrando(at: numberOfSoundOnboarding)
         //Then
         XCTAssertEqual(SoundsKit.audioIsOn(), true)
     }
     
     func test_finishOnboarding_falseCondicional() {
         //Given
-        let sut = 3
+        let numberOfSoundOnboarding = 3
         //When
-        SoundsKit.finishOnboarding(at: sut)
+        SoundsKit.finishOnboarding(at: numberOfSoundOnboarding)
         //Then
         XCTAssertEqual(SoundsKit.audioIsOn(), false)
     }
     
     func test_finishOnboarding_trueCondicional() {
         //Given
-        let sut = 1
+        let numberOfSoundOnboarding = 1
         //When
-        SoundsKit.finishOnboarding(at: sut)
+        SoundsKit.finishOnboarding(at: numberOfSoundOnboarding)
         //Then
         XCTAssertEqual(SoundsKit.audioIsOn(), true)
     }
     
     func test_isFinishOnboarding_trueCondicional() {
         //Given
-        let sut = 3
+        let numberOfSoundOnboarding = 3
         //When
-        SoundsKit.finishOnboarding(at: sut)
+        SoundsKit.finishOnboarding(at: numberOfSoundOnboarding)
         //Then
         XCTAssertTrue(SoundsKit.isFinishOnboarding())
     }
     
     func test_isFinishOnboarding_falseCondicional() {
         //Given
-        let sut = 1
+        let numberOfSoundOnboarding = 1
         //When
-        SoundsKit.finishOnboarding(at: sut)
+        SoundsKit.finishOnboarding(at: numberOfSoundOnboarding)
         //Then
         XCTAssertFalse(SoundsKit.isFinishOnboarding())
     }
