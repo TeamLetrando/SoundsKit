@@ -19,7 +19,8 @@ let package = Package(
             dependencies: [],
             path: "Sources",
             resources: [.process("SoundsKit/Resources/onboarding0.wav"),.process("SoundsKit/Resources/onboarding1.wav"),
-                        .process("SoundsKit/Resources/onboarding2.wav"), .process("SoundsKit/Resources/Curious_Kiddo.mp3")]),
+                        .process("SoundsKit/Resources/onboarding2.wav"), .process("SoundsKit/Resources/Curious_Kiddo.mp3"),
+                        .process("SoundsKit/Resources/audio01.wav")]),
         .testTarget(
             name: "SoundsKitTests",
             dependencies: ["SoundsKit"],

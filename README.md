@@ -72,9 +72,23 @@ SoundsKit.playBackgroundLetrando()
 ```
 
 Play Onboarding Sound Letrando ABC:
+ - Parameter `at`: Select the audio for each page onboarding
 
 ```swift
-SoundsKit.playOnboardingLetrando(at index: Int)
+SoundsKit.playOnboardingLetrando(at : Int)
+```
+
+Control Onboarding finish Letrando ABC:
+ - Parameter `at`: Select the audio for each page onboarding
+
+```swift
+SoundsKit.finishOnboarding(at index: Int)
+```
+
+Acess for Control Onboarding finish Letrando ABC:
+
+```swift
+SoundsKit.isFinishOnboarding()
 ```
 
 ## Features
