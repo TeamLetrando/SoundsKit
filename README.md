@@ -71,6 +71,12 @@ Play Background Sound Letrando ABC:
 SoundsKit.playBackgroundLetrando()
 ```
 
+Play Alert Sound Letrando ABC:
+
+```swift
+SoundsKit.playAlert()
+```
+
 Play Onboarding Sound Letrando ABC:
  - Parameter `at`: Select the audio for each page onboarding
 
@@ -89,6 +95,27 @@ Acess for Control Onboarding finish Letrando ABC:
 
 ```swift
 SoundsKit.isFinishOnboarding()
+```
+
+There are some functions for Formando app.
+
+Play Background Sound Formando:
+
+```swift
+SoundsKit.playBackgroundFormando()
+```
+
+Play Onboarding Sound Formando:
+ - Parameter `at`: Select the audio for each page onboarding
+
+```swift
+SoundsKit.playOnboardingFormando(at : Int)
+```
+
+Play Alert Sound Formando:
+
+```swift
+SoundsKit.playAlertFormando()
 ```
 
 ## Features
@@ -124,8 +151,16 @@ let package = Package(
             name: "SoundsKit",
             dependencies: [],
             path: "Sources",
-            resources: [.process("SoundsKit/Resources/onboarding0.wav"),.process("SoundsKit/Resources/onboarding1.wav"),
-                        .process("SoundsKit/Resources/onboarding2.wav"), .process("SoundsKit/Resources/Curious_Kiddo.mp3")]),
+            resources: [.process("SoundsKit/Resources/onboarding0.wav"),
+                        .process("SoundsKit/Resources/onboarding1.wav"),
+                        .process("SoundsKit/Resources/onboarding2.wav"),
+                        .process("SoundsKit/Resources/Curious_Kiddo.mp3"),
+                        .process("SoundsKit/Resources/audio01.wav"),
+                        .process("SoundsKit/Resources/Formando/Play_Date.mp3"),
+                        .process("SoundsKit/Resources/Formando/audio01_Formando.mp3"),
+                        .process("SoundsKit/Resources/Formando/onboarding0_Formando.mp3"),
+                        .process("SoundsKit/Resources/Formando/onboarding1_Formando.mp3"),
+                        .process("SoundsKit/Resources/Formando/onboarding2_Formando.mp3")]),
         .testTarget(
             name: "SoundsKitTests",
             dependencies: ["SoundsKit"],
