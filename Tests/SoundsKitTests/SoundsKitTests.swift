@@ -137,6 +137,35 @@ final class SoundsKitTests: XCTestCase {
         //Then
         XCTAssertEqual(SoundsKit.audioIsOn(), true)
     }
+
+    //MARK: Check Play Background Function Formando
+    func test_playBackgroundFormando() {
+        //When
+        try? SoundsKit.playBackgroundFormando()
+        //Then
+        XCTAssertEqual(SoundsKit.audioIsOn(), false)
+        
+    }
+
+    //MARK: Check Play Onboarding Function Formando
+    func test_playOnboardingFormando_withErrorFileExtension() {
+        //Given
+        let index = 6
+        //When
+        XCTAssertThrowsError(try SoundsKit.playOnboardingFormando(at: index)) { error in
+            //Then
+            XCTAssertEqual(error as! ErrorSound, ErrorSound.failedBundle)
+        }
+    }
+
+    func test_playOnboardingFormando() {
+        //Given
+        let numberOfSoundOnboarding = 1
+        //When
+        try? SoundsKit.playOnboardingFormando(at: numberOfSoundOnboarding)
+        //Then
+        XCTAssertEqual(SoundsKit.audioIsOn(), true)
+    }
     
     func test_finishOnboarding_falseCondicional() {
         //Given

@@ -125,6 +125,64 @@ open class SoundsKit{
         }
     }
     
+    /// Play sound for background Formando.
+    public static func playBackgroundFormando() throws {
+            /// Sound session. The default value is the shared `AVAudioSession` session with `ambient` category.
+            let audioSession = AVAudioSession.sharedInstance()
+            try audioSession.setCategory(.ambient)
+            try audioSession.setActive(true)
+        guard let url = bundle.url(forResource: "Play_Date", withExtension: "mp3") else {return}
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.stop()
+            audioPlayer?.numberOfLoops = -1
+            audioPlayer?.prepareToPlay()
+            audioPlayer?.play()
+            setKeyAudio(false)
+        } catch {
+            throw ErrorSound.failedSetAudio
+        }
+    }
+    
+    /// Play sound for background Formando.
+    /// - Parameter at: Select the audio for each page onboarding
+    public static func playOnboardingFormando(at index: Int) throws {
+            /// Sound session. The default value is the shared `AVAudioSession` session with `ambient` category.
+            let audioSession = AVAudioSession.sharedInstance()
+            try audioSession.setCategory(.ambient)
+            try audioSession.setActive(true)
+        guard let url = bundle.url(forResource: "onboarding\(index)_Formando", withExtension: "mp3") else {
+                throw ErrorSound.failedBundle
+            }
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.pause()
+            audioPlayer?.numberOfLoops = 1
+            audioPlayer?.prepareToPlay()
+            audioPlayer?.play()
+        } catch {
+            throw ErrorSound.failedSetAudio
+        }
+    }
+    
+    public static func playAlertFormando() throws {
+        /// Sound session. The default value is the shared `AVAudioSession` session with `ambient` category.
+        let audioSession = AVAudioSession.sharedInstance()
+        try audioSession.setCategory(.ambient)
+        try audioSession.setActive(true)
+        guard let url = bundle.url(forResource: "audio01_Formando", withExtension: "mp3") else {
+            throw ErrorSound.failedBundle
+        }
+        do {
+            player = AVPlayer(url: url)
+            player?.allowsExternalPlayback = true
+            if ((audioPlayer?.isPlaying) != nil) {
+                audioPlayer?.setVolume(0.5, fadeDuration: 0.7)
+            }
+            player?.play()
+        }
+    }
+    
     /// Stop playing the sound.
     public static func stop() {
         audioPlayer?.stop()
